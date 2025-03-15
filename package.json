@@ -1,0 +1,28 @@
+{
+  "name": "sonic-restaking-sdk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AnyAxis-Labs/metis-trading-engine.git",
+  "author": "aa-sniperman <nhatducmo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "index": "npx ts-node -r tsconfig-paths/register src/index.ts"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.13",
+    "@solana/web3.js": "^1.98.0",
+    "bn.js": "^5.2.1",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.6",
+    "@types/node": "^20.3.1",
+    "@types/node-cron": "^3.0.11",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0",
+    "typechain": "^8.3.2",
+    "typescript": "^5.1.3"
+  }
+}
