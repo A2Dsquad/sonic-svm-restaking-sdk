@@ -1,6 +1,5 @@
 import { Buffer } from 'buffer';
 import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
-
 // Public key that identifies the metadata program.
 export const METADATA_PROGRAM_ID = new PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
 export const METADATA_MAX_NAME_LENGTH = 32;

@@ -9,6 +9,8 @@
     "index": "npx ts-node -r tsconfig-paths/register src/index.ts"
   },
   "dependencies": {
+    "@coral-xyz/anchor": "^0.31.0",
+    "@metaplex-foundation/js": "^0.20.1",
     "@solana/spl-token": "^0.4.13",
     "@solana/web3.js": "^1.98.0",
     "bn.js": "^5.2.1",

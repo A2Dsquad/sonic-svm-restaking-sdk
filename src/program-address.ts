@@ -1,11 +1,12 @@
-import { PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@solana/web3.js';
 import BN from 'bn.js';
 import { Buffer } from 'buffer';
 import {
   METADATA_PROGRAM_ID,
   EPHEMERAL_STAKE_SEED_PREFIX,
   TRANSIENT_STAKE_SEED_PREFIX,
-} from '../constants';
+} from './restaking/constants';
+import { createAssociatedTokenAccountInstruction, getAssociatedTokenAddressSync, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 /**
  * Generates the withdraw authority program address for the stake pool
@@ -60,6 +61,51 @@ export function findTransientStakeProgramAddress(
     programId,
   );
   return publicKey;
+}
+
+export function parseTokenResponseToAccountInfo(res: any): Array<{ pubkey: PublicKey; account: any }> {
+  return res.value.map((data: any) => ({
+    pubkey: data.pubkey,
+    account: data.account,
+  }));
+}
+
+export async function findOrCreateAssociatedTokenAccountByMint(connection: Connection, tokenPubkey: PublicKey, userPubkey: PublicKey, payer?: PublicKey) {
+  const mint = tokenPubkey;
+
+  let parsedAccounts: {
+    pubkey: PublicKey;
+    account: any;
+  }[] = [];
+  try {
+    const accounts = await connection.getParsedTokenAccountsByOwner(userPubkey, {
+      mint,
+      programId: TOKEN_PROGRAM_ID,
+    });
+
+    parsedAccounts = parseTokenResponseToAccountInfo(accounts);
+  } catch (err) {
+
+  }
+
+  if (parsedAccounts && parsedAccounts.length > 0) {
+    return {
+      tokenAccountAddress: parsedAccounts[0].pubkey,
+    };
+  } else {
+    const newAtaTokenAccount = getAssociatedTokenAddressSync(mint, userPubkey, false);
+    const newAtaAccountInstruction = createAssociatedTokenAccountInstruction(
+      payer ?? userPubkey,
+      newAtaTokenAccount,
+      userPubkey,
+      mint
+    );
+
+    return {
+      tokenAccountAddress: newAtaTokenAccount,
+      accountCreationInstruction: newAtaAccountInstruction,
+    };
+  }
 }
 
 /**

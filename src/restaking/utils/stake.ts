@@ -6,7 +6,7 @@ import {
   SystemProgram,
   TransactionInstruction,
 } from '@solana/web3.js';
-import { findStakeProgramAddress, findTransientStakeProgramAddress } from './program-address';
+import { findStakeProgramAddress, findTransientStakeProgramAddress } from '../../program-address';
 import BN from 'bn.js';
 
 import { lamportsToSol } from './math';
