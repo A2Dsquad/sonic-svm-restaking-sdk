@@ -103,7 +103,8 @@
                     "address": "4yLVEowhDEy4Xrs9Quaqka5Yq96iZSnmPDfENJrpFz3j"
                 },
                 {
-                    "name": "user_token_account"
+                    "name": "user_token_account",
+                    "writable": true
                 },
                 {
                     "name": "token_mint",

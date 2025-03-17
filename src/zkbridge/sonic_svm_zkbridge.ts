@@ -109,7 +109,8 @@ export type SonicSvmZkbridge = {
           "address": "4yLVEowhDEy4Xrs9Quaqka5Yq96iZSnmPDfENJrpFz3j"
         },
         {
-          "name": "userTokenAccount"
+          "name": "userTokenAccount",
+          "writable": true
         },
         {
           "name": "tokenMint",

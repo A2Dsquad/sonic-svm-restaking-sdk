@@ -70,5 +70,5 @@ async function mintZKToken() {
     console.log(txId)
 }
 
-// mintZKToken().then();
-getTokenBalance(signer.publicKey, ZKBRIDE_MINT).then()
+mintZKToken().then();
+// getTokenBalance(signer.publicKey, ZKBRIDE_MINT).then()
