@@ -5,6 +5,7 @@ import { sendTransaction } from "./transactions";
 import { getAccount, getAssociatedTokenAddressSync } from "@solana/spl-token";
 import { createZkBridgeToken, mintZkBridgeToken } from "./zkbridge";
 import { ZKBRIDE_MINT } from "./zkbridge/constants";
+import { initialize } from "./pump";
 
 const stakePoolAddress = new PublicKey("8DPF9cZzpSoXuvTT92AXJL5wy4Cz4Y8Y4YsRFv7idn3t");
 const poolMint = new PublicKey("DRku5U6mhLwSUecTwLa8byvkP1jAb3tX1mY92i4XBJRa");
@@ -59,16 +60,22 @@ async function deposit() {
 }
 
 async function createZkBMint() {
-    const {instructions} = await createZkBridgeToken("senETH", "sentra ETH", "URI");
+    const { instructions } = await createZkBridgeToken("senETH", "sentra ETH", "URI");
     const txId = await sendTransaction(instructions, [], signer);
     console.log(txId)
 }
 
 async function mintZKToken() {
-    const {instructions} = await mintZkBridgeToken(connection, signer.publicKey, 1_000_000_000, signer.publicKey);
+    const { instructions } = await mintZkBridgeToken(connection, signer.publicKey, 1_000_000_000, signer.publicKey);
     const txId = await sendTransaction(instructions, [], signer);
     console.log(txId)
 }
 
-mintZKToken().then();
-// getTokenBalance(signer.publicKey, ZKBRIDE_MINT).then()
+async function initializePump() {
+    const { instructions } = await initialize(connection, signer.publicKey, signer.publicKey);
+    const txId = await sendTransaction(instructions, [], signer);
+    console.log(txId)
+}
+
+initializePump().then();
+// getTokenBalance(signer.publicKey, poolMint).then()
