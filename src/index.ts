@@ -73,6 +73,7 @@ async function mintZKToken() {
 
 async function initializePump() {
     const { instructions } = await initialize(connection, signer.publicKey, signer.publicKey);
+    console.log(instructions)
     const txId = await sendTransaction(instructions, [], signer);
     console.log(txId)
 }

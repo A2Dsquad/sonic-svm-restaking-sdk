@@ -1,5 +1,5 @@
 import { SonicSvmZkbridge } from "./sonic_svm_zkbridge"
-import { Program } from "@coral-xyz/anchor"
+import { Program, type Provider } from "@coral-xyz/anchor";
 import { Connection, PublicKey, TransactionInstruction } from "@solana/web3.js"
 import { findMetadataAddress, findOrCreateAssociatedTokenAccountByMint } from "src/restaking/utils"
 import idl from './idl.json'
